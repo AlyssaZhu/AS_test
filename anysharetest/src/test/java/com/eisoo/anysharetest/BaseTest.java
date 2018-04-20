@@ -16,10 +16,20 @@ import org.testng.annotations.Test;
 import io.appium.java_client.android.AndroidDriver;
 
 public class BaseTest {
-	AndroidDriver driver;
+	static AndroidDriver driver;
+	static int moduleId=0;
+	static int caseId=0;
 	//初始化driver
-	@BeforeClass
-	public void BeforeClass() throws Exception
+/*//	@BeforeClass
+	  public void beforeClass() throws Exception {  
+			System.out.println("base beforeclass");
+			init();
+			loginTest("116.236.224.243","zfy","123123");
+		}*/
+			
+		
+	
+	public void init() throws Exception
 	{
 	 	DesiredCapabilities cap=new DesiredCapabilities();
 		//	cap.setCapability("app", app.getAbsolutePath());
@@ -37,8 +47,8 @@ public class BaseTest {
 		cap.setCapability("sessionOverride", true); 
 		driver =new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"),cap);
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);//设置隐式等待超时时间2秒
-		Thread.sleep(3000);
-		System.out.println(this.getClass().getName());
+		//Thread.sleep(3000);
+		System.out.println("Module"+(++moduleId)+":"+this.getClass().getName());
 	}
 	//进入文件夹
 	public void enterFolder(String folderName) throws Exception
@@ -101,7 +111,7 @@ public class BaseTest {
   	public boolean exist(String name)
   	{
   		if(driver.getPageSource().contains(name))
-  		{	System.out.println("存在标签"+name);
+  		{	System.out.println("页面存在元素："+name);
   			return true;}
   
   		else
@@ -142,7 +152,7 @@ public class BaseTest {
 	public void enterDest(String destName,int permission) throws Exception
 	{
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		Thread.sleep(5000);// 这2句主要是为了应付框架点不中的Bug
+		Thread.sleep(1000);// 这2句主要是为了应付框架点不中的Bug
 		startAS();
 		if(permission==0)
 		{
@@ -152,9 +162,10 @@ public class BaseTest {
 		}
 		else
 		{
-			clickFile("个人文档");
+		//	clickFile("个人文档");
 			clickFile("vivi");
 			clickFile(".自动化目录");
+			if(destName!="根目录")
 			clickFile(destName);				
 		}
 		
@@ -184,7 +195,8 @@ public class BaseTest {
 			clickName("vivi");
 		}
 		clickName(".自动化目录");
-		clickName(destName);
+		if(destName!="根目录")
+		{clickFile(destName);}
 		
 	}
 	
@@ -290,7 +302,6 @@ public class BaseTest {
   	}
   	public boolean exist(WebElement e1)
   	{
-  		
   		try{
   		e1.getClass();
   		return true;
@@ -320,7 +331,6 @@ public class BaseTest {
   	
   	public boolean elementNameExist(String text)
   	{
-  		
   			try
   			{	driver.findElement(By.name(text));
   				return true;
@@ -418,12 +428,6 @@ public class BaseTest {
 		
   	}
   	
-  	
-  	
-  	
-  	
-  	
-
  
   	@Test(enabled= false)
   	public void testLogin() throws Exception
@@ -449,7 +453,6 @@ public class BaseTest {
 		driver.findElementByName("删除").click();
 		driver.pressKeyCode(3);	
 		System.out.println("clearData 清除数据");
-		
   	}
   	
 	//this method is apply to download,upload,backup feature
@@ -478,6 +481,10 @@ public class BaseTest {
 		driver.pressKeyCode(4);
 		System.out.println("执行返回");
 	}
+	
+	
+	
+	
 	//该方法实现上传／下载，切换过网络后下、，选择等待Wi-Fi上传
 	//this method is apply to the popup wheather waitfor wifi 
 	public void onlyWifi(int waitWifi)
@@ -506,7 +513,7 @@ public class BaseTest {
 	}
 	
 
-   	@Test(groups="login")
+  // 	@Test(groups="login")
   	public void loginDomainTest() throws Exception
   	{	 
  		System.out.println(Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -533,7 +540,8 @@ public class BaseTest {
 		}
   			
   		if(type==1)
-  			driver.findElementByAndroidUIAutomator("new UiSelector().description(\"download\").instance(0)").click();
+  		{   Thread.sleep(1000);
+  			driver.findElementByAndroidUIAutomator("new UiSelector().description(\"download\").instance(0)").click();}
   	//	driver.findElementByAndroidUIAutomator("new UiSelector().description(\"uploadfile\").instance("+i+")").click();
   		return(exist("已暂停"));
   	}
@@ -577,7 +585,7 @@ public class BaseTest {
 	{
 	  WebElement e2=driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.eisoo.anyshare:id/tv_file_name\").instance("+rank+")");
 	  String fileName=e2.getText();
-	  System.out.println("准备删除文件2"+e2.getText());
+	  System.out.println("准备操作文件:"+e2.getText());
 		if(rank<8)
 		{
 			driver.findElementByAndroidUIAutomator("new UiSelector().description(\"pull\").instance("+rank+")").click();	
@@ -631,4 +639,125 @@ public class BaseTest {
 			return !exist("多国文字的输入法 - 华为 Swype 输入法");
 		}
 	}
+	
+	public void delFiles(int num) throws Exception
+	{
+		startAS();
+		if(exist("文件夹是空的"))
+		{
+			System.out.println("空文件夹！");		
+		}
+		else 
+		{
+			manageFiles(num,"删除");
+			clickName("确定");		
+		}
+	}
+	
+	//只能1到8
+	  public String clickFile(int rank)
+	  {
+		
+		  WebElement e2=driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.eisoo.anyshare:id/tv_file_name\").instance("+rank+")");
+		  String fileName=e2.getText();
+		  System.out.println("准备操作文件:"+e2.getText());
+		  e2.click();
+		  return fileName;
+		  
+	  }
+	  
+	  public String language()
+		{
+			try{
+				if(exist(driver.findElementById("com.eisoo.anyshare:id/tv_languageSetting")))//是否在首页
+				{
+					if(exist("语言设置"))
+						return "简体中文";
+						else if(exist("語言設置"))
+						return "繁體中文";
+						else if (exist("Language Settings"))
+						return "English";
+						else	
+							return "error";	
+				}
+				
+			}
+			
+			catch(Exception e)
+			{
+				if(exist("传输"))
+					return "简体中文";
+					else if(exist("傳輸"))
+					return "繁體中文";
+					else if (exist("Transfer"))
+					return "English";
+					else	
+						return "error";	
+				
+			}
+			return null;
+			
+		}
+		
+		public boolean isSame(String lang) throws Exception
+		{
+			Thread.sleep(3000);
+			startAS();//目的是为了刷新一下界面，
+			String currentlang=language();
+			System.out.println("当前APP界面上的语言*********"+currentlang);
+			if(lang.equals(currentlang))
+			{
+				return true;
+			}
+			else 
+				return false;
+		}
+		
+		public void langSet(String lang) throws Exception
+			{
+				Thread.sleep(1000);
+				driver.findElementById("com.eisoo.anyshare:id/rl_setting").click();
+				driver.findElementById("com.eisoo.anyshare:id/rl_language_set").click();
+				clickName(lang);
+				WebElement e1=driver.findElementById("com.eisoo.anyshare:id/tv_language_set_save");
+				if(e1.isEnabled())
+				{	e1.click();
+					assertTrue(isSame(lang),"语言没有切换!");}
+				else 
+					System.out.println("语言没作修改，没必要保存");
+			
+		}
+		
+		public void  langSetHome(String lang) throws Exception
+		{
+			logout();
+			clickId("com.eisoo.anyshare:id/tv_languageSetting");
+			WebElement e1=driver.findElementById("com.eisoo.anyshare:id/tv_language_set_save");
+			clickName(lang);
+			if(e1.isEnabled())
+			{	e1.click();
+				assertTrue(isSame(lang),"语言没有切换!");}
+			else 
+				System.out.println("语言没作修改，没必要保存");
+			
+		}
+		
+		public void logout() throws Exception
+		{
+			try{
+				exist(driver.findElementById("com.eisoo.anyshare:id/tv_languageSetting"));
+			
+				System.out.println("已注销状态");
+				}
+		
+			catch(Exception e)
+			{
+				clickId("com.eisoo.anyshare:id/rl_setting");
+				swipe("down");
+				clickId("com.eisoo.anyshare:id/tv_outapp");
+				clickId("com.eisoo.anyshare:id/positiveButton");
+				Thread.sleep(1000);
+			}
+		}
+		
 }
