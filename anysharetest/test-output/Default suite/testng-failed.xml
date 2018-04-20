@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <test verbose="2" name="Default test">
+  <test name="Default test(failed)">
     <classes>
-      <class name="com.eisoo.anysharetest.BaseTest"/>
+      <class name="com.eisoo.anysharetest.Demoxest">
+        <methods>
+          <include name="beforeTest"/>
+          <include name="beforeMethod"/>
+          <include name="beforeSuite"/>
+          <include name="testmanytimes3"/>
+          <include name="afterClass"/>
+          <include name="testmanytimes4"/>
+          <include name="afterMethod"/>
+          <include name="afterTest"/>
+          <include name="testmanytimes2"/>
+          <include name="beforeClass"/>
+          <include name="afterSuite"/>
+        </methods>
+      </class> <!-- com.eisoo.anysharetest.Demoxest -->
     </classes>
-  </test> <!-- Default test -->
+  </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

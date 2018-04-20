@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Surefire test"
+           tests="2"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="44.468">
+  <properties />
+  
+  
+            <testcase name="unmarkAnyFile" time="23.778" classname="com.eisoo.anysharetest.MarkTest" />
+                <testcase name="markAnyFile" time="20.690" classname="com.eisoo.anysharetest.MarkTest" />
+      
+</testsuite>

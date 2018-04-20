@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Surefire test"
+           tests="8"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="484.223">
+  <properties />
+  
+  
+            <testcase name="copyFile" time="49.395" classname="com.eisoo.anysharetest.CopyMoveTest" />
+                <testcase name="moveFile" time="59.434" classname="com.eisoo.anysharetest.CopyMoveTest" />
+                <testcase name="moveFileSingle" time="47.354" classname="com.eisoo.anysharetest.CopyMoveTest" />
+                <testcase name="copyAllFiles" time="63.507" classname="com.eisoo.anysharetest.CopyMoveTest" />
+                <testcase name="moveAllFiles" time="86.940" classname="com.eisoo.anysharetest.CopyMoveTest" />
+                <testcase name="copyFileSingle" time="49.344" classname="com.eisoo.anysharetest.CopyMoveTest" />
+                <testcase name="moveFiles" time="74.768" classname="com.eisoo.anysharetest.CopyMoveTest" />
+                <testcase name="copyFiles" time="53.481" classname="com.eisoo.anysharetest.CopyMoveTest" />
+      
+</testsuite>

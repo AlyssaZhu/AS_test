@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Surefire test"
+           tests="7"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="333.537">
+  <properties />
+  
+  
+            <testcase name="downldNoWifi" time="58.456" classname="com.eisoo.anysharetest.DownloadTest" />
+                <testcase name="downldMultiFile" time="61.245" classname="com.eisoo.anysharetest.DownloadTest" />
+                <testcase name="downldAFile" time="26.478" classname="com.eisoo.anysharetest.DownloadTest" />
+                <testcase name="downldNoPermisison" time="32.414" classname="com.eisoo.anysharetest.DownloadTest" />
+                <testcase name="downldAllFile" time="55.149" classname="com.eisoo.anysharetest.DownloadTest" />
+                <testcase name="downldManyFile" time="45.079" classname="com.eisoo.anysharetest.DownloadTest" />
+                <testcase name="downldWaitWfi" time="54.716" classname="com.eisoo.anysharetest.DownloadTest" />
+      
+</testsuite>

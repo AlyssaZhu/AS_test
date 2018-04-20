@@ -30,7 +30,7 @@
     <dependency>
     <groupId>io.appium</groupId>
     <artifactId>java-client</artifactId>
-    <version>3.4.0</version>
+    <version>3.4.1</version>
     <scope>compile</scope>
     </dependency>
     <dependency>
@@ -95,6 +95,7 @@
   		<workingDirectory>target</workingDirectory>
   	</configuration>
   </plugin>
+
   </plugins>
   </build> 
   </project>

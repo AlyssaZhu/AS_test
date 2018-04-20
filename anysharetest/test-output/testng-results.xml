@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="6" total="7" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="77130" started-at="2018-03-21T02:55:11Z" finished-at="2018-03-21T02:56:28Z">
+  <suite name="Default suite" duration-ms="110051" started-at="2018-04-20T06:15:15Z" finished-at="2018-04-20T06:17:05Z">
     <groups>
-      <group name="login">
-        <method signature="BaseTest.loginDomainTest()[pri:0, instance:com.eisoo.anysharetest.BaseTest@5b87ed94]" name="loginDomainTest" class="com.eisoo.anysharetest.BaseTest"/>
-      </group> <!-- login -->
     </groups>
-    <test name="Default test" duration-ms="77130" started-at="2018-03-21T02:55:11Z" finished-at="2018-03-21T02:56:28Z">
-      <class name="com.eisoo.anysharetest.BaseTest">
-        <test-method status="PASS" signature="BeforeClass()[pri:0, instance:com.eisoo.anysharetest.BaseTest@5b87ed94]" name="BeforeClass" is-config="true" duration-ms="12533" started-at="2018-03-21T10:55:11Z" finished-at="2018-03-21T10:55:23Z">
+    <test name="Default test" duration-ms="110051" started-at="2018-04-20T06:15:15Z" finished-at="2018-04-20T06:17:05Z">
+      <class name="com.eisoo.anysharetest.Demoxest">
+        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="beforeSuite" is-config="true" duration-ms="7" started-at="2018-04-20T14:15:15Z" finished-at="2018-04-20T14:15:15Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- BeforeClass -->
-        <test-method status="PASS" signature="loginDomainTest()[pri:0, instance:com.eisoo.anysharetest.BaseTest@5b87ed94]" name="loginDomainTest" duration-ms="62877" started-at="2018-03-21T10:55:23Z" finished-at="2018-03-21T10:56:26Z">
+        </test-method> <!-- beforeSuite -->
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="beforeTest" is-config="true" duration-ms="0" started-at="2018-04-20T14:15:15Z" finished-at="2018-04-20T14:15:15Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginDomainTest -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.eisoo.anysharetest.BaseTest@5b87ed94]" name="afterClass" is-config="true" duration-ms="1706" started-at="2018-03-21T10:56:26Z" finished-at="2018-03-21T10:56:28Z">
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="beforeClass" is-config="true" duration-ms="61037" started-at="2018-04-20T14:15:15Z" finished-at="2018-04-20T14:16:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="beforeMethod" is-config="true" duration-ms="4859" started-at="2018-04-20T14:16:16Z" finished-at="2018-04-20T14:16:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="testmanytimes2()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="testmanytimes2" duration-ms="42384" started-at="2018-04-20T14:16:21Z" finished-at="2018-04-20T14:17:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testmanytimes2 -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="afterClass" is-config="true" duration-ms="1754" started-at="2018-04-20T14:17:03Z" finished-at="2018-04-20T14:17:05Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-      </class> <!-- com.eisoo.anysharetest.BaseTest -->
+        <test-method status="PASS" signature="afterMethod()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="afterMethod" is-config="true" duration-ms="0" started-at="2018-04-20T14:17:03Z" finished-at="2018-04-20T14:17:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="afterTest" is-config="true" duration-ms="1" started-at="2018-04-20T14:17:05Z" finished-at="2018-04-20T14:17:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+        <test-method status="PASS" signature="afterSuite()[pri:0, instance:com.eisoo.anysharetest.Demoxest@551aa95a]" name="afterSuite" is-config="true" duration-ms="1" started-at="2018-04-20T14:17:05Z" finished-at="2018-04-20T14:17:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterSuite -->
+      </class> <!-- com.eisoo.anysharetest.Demoxest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

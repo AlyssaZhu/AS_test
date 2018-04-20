@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="3,242.362" tests="56" errors="0" skipped="0" failures="6">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="25.40-b25"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/apple/Documents/Eisoo Git code/AndroidAutoTest/anysharetest"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/apple/Documents/Eisoo Git code/AndroidAutoTest/anysharetest"/>
+    <property name="java.runtime.version" value="1.8.0_40-b27"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/np/_f8hm2hs47d7ptnbk41f5ytc0000gn/T/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/Users/apple/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf5510801519262551274.tmp"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/apple/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.13.2"/>
+    <property name="user.home" value="/Users/apple"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="apple"/>
+    <property name="java.class.path" value="/Users/apple/Desktop/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.m2e.maven.runtime_1.6.2.20150902-0001/jars/plexus-classworlds-2.5.2.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B -s /Users/apple/Documents/workspace/Maven/apache-maven-3.5.2/conf/settings.xml test"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="zh"/>
+    <property name="user.language.format" value="en"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_40"/>
+    <property name="java.ext.dirs" value="/Users/apple/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/Users/apple/Documents/Eisoo Git code/AndroidAutoTest/anysharetest/EMBEDDED"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase name="copyAllFiles" classname="com.eisoo.anysharetest.CopyMoveTest" time="63.507"/>
+  <testcase name="copyFile" classname="com.eisoo.anysharetest.CopyMoveTest" time="49.395"/>
+  <testcase name="copyFileSingle" classname="com.eisoo.anysharetest.CopyMoveTest" time="49.344"/>
+  <testcase name="copyFiles" classname="com.eisoo.anysharetest.CopyMoveTest" time="53.482"/>
+  <testcase name="moveAllFiles" classname="com.eisoo.anysharetest.CopyMoveTest" time="86.94"/>
+  <testcase name="moveFile" classname="com.eisoo.anysharetest.CopyMoveTest" time="59.434"/>
+  <testcase name="moveFileSingle" classname="com.eisoo.anysharetest.CopyMoveTest" time="47.354"/>
+  <testcase name="moveFiles" classname="com.eisoo.anysharetest.CopyMoveTest" time="74.768"/>
+  <testcase name="downldAFile" classname="com.eisoo.anysharetest.DownloadTest" time="26.478"/>
+  <testcase name="downldAllFile" classname="com.eisoo.anysharetest.DownloadTest" time="55.149"/>
+  <testcase name="downldManyFile" classname="com.eisoo.anysharetest.DownloadTest" time="45.08"/>
+  <testcase name="downldMultiFile" classname="com.eisoo.anysharetest.DownloadTest" time="61.245"/>
+  <testcase name="downldNoWifi" classname="com.eisoo.anysharetest.DownloadTest" time="58.457"/>
+  <testcase name="downldNoPermisison" classname="com.eisoo.anysharetest.DownloadTest" time="32.415"/>
+  <testcase name="downldWaitWfi" classname="com.eisoo.anysharetest.DownloadTest" time="54.716"/>
+  <testcase name="setaEn" classname="com.eisoo.anysharetest.LanguageSetTest" time="36.911"/>
+  <testcase name="setaTraditional" classname="com.eisoo.anysharetest.LanguageSetTest" time="17.101">
+    <failure message="An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)&#10;Command duration or timeout: 10.77 seconds&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b1534ae328c771e0856c93e187490ca824&apos;, time: &apos;2016-03-15 10:43:46&apos;&#10;System info: host: &apos;VivideMacBook-Pro.local&apos;, ip: &apos;192.168.35.159&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.13.2&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: io.appium.java_client.android.AndroidDriver&#10;Capabilities [{appPackage=com.eisoo.anyshare, deviceScreenSize=1080x1920, networkConnectionEnabled=true, noSign=true, warnings={}, databaseEnabled=false, deviceName=PBV0216526000628, platform=LINUX, MobileCapabilityType.AUTOMATION_NAME=Appium, deviceUDID=PBV0216526000628, appActivity=.AppStartActivity, desired={appPackage=com.eisoo.anyshare, appActivity=.AppStartActivity, noSign=true, platformVersion=7.0, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceName=testyy, resetKeyboard=true, MobileCapabilityType.AUTOMATION_NAME=Appium}, platformVersion=7.0, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=EVA-AL00, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceManufacturer=HUAWEI, resetKeyboard=true}]&#10;Session ID: 120c2c5a-7365-4b41-b579-349515e85917&#10;*** Element info: {Using=id, value=com.eisoo.anyshare:id/rl_setting}" type="org.openqa.selenium.NoSuchElementException">org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 10.77 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'VivideMacBook-Pro.local', ip: '192.168.35.159', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.13.2', java.version: '1.8.0_40'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{appPackage=com.eisoo.anyshare, deviceScreenSize=1080x1920, networkConnectionEnabled=true, noSign=true, warnings={}, databaseEnabled=false, deviceName=PBV0216526000628, platform=LINUX, MobileCapabilityType.AUTOMATION_NAME=Appium, deviceUDID=PBV0216526000628, appActivity=.AppStartActivity, desired={appPackage=com.eisoo.anyshare, appActivity=.AppStartActivity, noSign=true, platformVersion=7.0, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceName=testyy, resetKeyboard=true, MobileCapabilityType.AUTOMATION_NAME=Appium}, platformVersion=7.0, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=EVA-AL00, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceManufacturer=HUAWEI, resetKeyboard=true}]
+Session ID: 120c2c5a-7365-4b41-b579-349515e85917
+*** Element info: {Using=id, value=com.eisoo.anyshare:id/rl_setting}
+	at com.eisoo.anysharetest.LanguageSetTest.langSet(LanguageSetTest.java:135)
+	at com.eisoo.anysharetest.LanguageSetTest.setaTraditional(LanguageSetTest.java:50)
+</failure>
+    <system-out><![CDATA[执行1次kill AS
+存在标签爱数 AnyShare
+]]></system-out>
+  </testcase>
+  <testcase name="setbCh" classname="com.eisoo.anysharetest.LanguageSetTest" time="41.005"/>
+  <testcase name="setbEnHome" classname="com.eisoo.anysharetest.LanguageSetTest" time="41.752"/>
+  <testcase name="setbTraditionalHome" classname="com.eisoo.anysharetest.LanguageSetTest" time="23.527"/>
+  <testcase name="setcChHome" classname="com.eisoo.anysharetest.LanguageSetTest" time="21.563"/>
+  <testcase name="markAnyFile" classname="com.eisoo.anysharetest.MarkTest" time="20.69"/>
+  <testcase name="unmarkAnyFile" classname="com.eisoo.anysharetest.MarkTest" time="23.778"/>
+  <testcase name="setOnTest" classname="com.eisoo.anysharetest.GestureTest" time="86.985"/>
+  <testcase name="modifyTest" classname="com.eisoo.anysharetest.GestureTest" time="48.976"/>
+  <testcase name="unlockTest" classname="com.eisoo.anysharetest.GestureTest" time="34.114"/>
+  <testcase name="setOffTest" classname="com.eisoo.anysharetest.GestureTest" time="17.479">
+    <failure message="An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)&#10;Command duration or timeout: 3.04 seconds&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b1534ae328c771e0856c93e187490ca824&apos;, time: &apos;2016-03-15 10:43:46&apos;&#10;System info: host: &apos;VivideMacBook-Pro.local&apos;, ip: &apos;192.168.35.159&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.13.2&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: io.appium.java_client.android.AndroidDriver&#10;Capabilities [{appPackage=com.eisoo.anyshare, deviceScreenSize=1080x1920, networkConnectionEnabled=true, noSign=true, warnings={}, databaseEnabled=false, deviceName=PBV0216526000628, platform=LINUX, MobileCapabilityType.AUTOMATION_NAME=Appium, deviceUDID=PBV0216526000628, appActivity=.AppStartActivity, desired={appPackage=com.eisoo.anyshare, appActivity=.AppStartActivity, noSign=true, platformVersion=7.0, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceName=testyy, resetKeyboard=true, MobileCapabilityType.AUTOMATION_NAME=Appium}, platformVersion=7.0, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=EVA-AL00, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceManufacturer=HUAWEI, resetKeyboard=true}]&#10;Session ID: ef89fde6-aa8f-4fc4-a268-fdcad079e1ce&#10;*** Element info: {Using=name, value=我的}" type="org.openqa.selenium.NoSuchElementException">org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.04 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'VivideMacBook-Pro.local', ip: '192.168.35.159', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.13.2', java.version: '1.8.0_40'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{appPackage=com.eisoo.anyshare, deviceScreenSize=1080x1920, networkConnectionEnabled=true, noSign=true, warnings={}, databaseEnabled=false, deviceName=PBV0216526000628, platform=LINUX, MobileCapabilityType.AUTOMATION_NAME=Appium, deviceUDID=PBV0216526000628, appActivity=.AppStartActivity, desired={appPackage=com.eisoo.anyshare, appActivity=.AppStartActivity, noSign=true, platformVersion=7.0, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceName=testyy, resetKeyboard=true, MobileCapabilityType.AUTOMATION_NAME=Appium}, platformVersion=7.0, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=EVA-AL00, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceManufacturer=HUAWEI, resetKeyboard=true}]
+Session ID: ef89fde6-aa8f-4fc4-a268-fdcad079e1ce
+*** Element info: {Using=name, value=我的}
+	at com.eisoo.anysharetest.GestureTest.setOff(GestureTest.java:108)
+	at com.eisoo.anysharetest.GestureTest.setOffTest(GestureTest.java:75)
+</failure>
+    <system-out><![CDATA[执行1次kill AS
+存在标签爱数 AnyShare
+执行1次kill AS
+存在标签爱数 AnyShare
+]]></system-out>
+  </testcase>
+  <testcase name="asearchInlink" classname="com.eisoo.anysharetest.FilelistTest" time="62.681"/>
+  <testcase name="delFile" classname="com.eisoo.anysharetest.FilelistTest" time="18.75"/>
+  <testcase name="delFiles" classname="com.eisoo.anysharetest.FilelistTest" time="19.401"/>
+  <testcase name="renameFile" classname="com.eisoo.anysharetest.FilelistTest" time="29.877"/>
+  <testcase name="searchAlldir" classname="com.eisoo.anysharetest.FilelistTest" time="37.955"/>
+  <testcase name="searchExlink" classname="com.eisoo.anysharetest.FilelistTest" time="57.961"/>
+  <testcase name="searchKws" classname="com.eisoo.anysharetest.FilelistTest" time="41.112"/>
+  <testcase name="uploadAllVideo" classname="com.eisoo.anysharetest.UploadTest" time="32.253"/>
+  <testcase name="uploadAudio" classname="com.eisoo.anysharetest.UploadTest" time="54.422"/>
+  <testcase name="uploadContinueVideo" classname="com.eisoo.anysharetest.UploadTest" time="52.544"/>
+  <testcase name="uploadFile" classname="com.eisoo.anysharetest.UploadTest" time="34.224"/>
+  <testcase name="uploadMulVideo" classname="com.eisoo.anysharetest.UploadTest" time="38.185"/>
+  <testcase name="uploadNoPermission" classname="com.eisoo.anysharetest.UploadTest" time="30.949"/>
+  <testcase name="uploadNoWifi" classname="com.eisoo.anysharetest.UploadTest" time="64.69"/>
+  <testcase name="uploadPauseVideo" classname="com.eisoo.anysharetest.UploadTest" time="47.033"/>
+  <testcase name="uploadPics" classname="com.eisoo.anysharetest.UploadTest" time="48.337"/>
+  <testcase name="uploadTakePhoto" classname="com.eisoo.anysharetest.UploadTest" time="57.536"/>
+  <testcase name="uploadVideo" classname="com.eisoo.anysharetest.UploadTest" time="48.11"/>
+  <testcase name="uploadWaitWifi" classname="com.eisoo.anysharetest.UploadTest" time="31.37">
+    <failure message="不存在等待Wi-Fi标记 expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: 不存在等待Wi-Fi标记 expected [true] but found [false]
+	at com.eisoo.anysharetest.UploadTest.uploadWaitWifi(UploadTest.java:107)
+</failure>
+    <system-out><![CDATA[执行1次kill AS
+存在标签爱数 AnyShare
+uploadWaitWifi
+网络不需要切换
+执行返回
+不存在等待WI-FI弹框 
+页面存在元素：正在上传
+]]></system-out>
+  </testcase>
+  <testcase name="addcomm_diffChar" classname="com.eisoo.anysharetest.CommtTest" time="44.275"/>
+  <testcase name="addcomm_inlimit" classname="com.eisoo.anysharetest.CommtTest" time="51.28"/>
+  <testcase name="addcomm_overlimit" classname="com.eisoo.anysharetest.CommtTest" time="24.261">
+    <failure message="An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)&#10;Command duration or timeout: 3.14 seconds&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b1534ae328c771e0856c93e187490ca824&apos;, time: &apos;2016-03-15 10:43:46&apos;&#10;System info: host: &apos;VivideMacBook-Pro.local&apos;, ip: &apos;192.168.35.159&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.13.2&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: io.appium.java_client.android.AndroidDriver&#10;Capabilities [{appPackage=com.eisoo.anyshare, deviceScreenSize=1080x1920, networkConnectionEnabled=true, noSign=true, warnings={}, databaseEnabled=false, deviceName=PBV0216526000628, platform=LINUX, MobileCapabilityType.AUTOMATION_NAME=Appium, deviceUDID=PBV0216526000628, appActivity=.AppStartActivity, desired={appPackage=com.eisoo.anyshare, appActivity=.AppStartActivity, noSign=true, platformVersion=7.0, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceName=testyy, resetKeyboard=true, MobileCapabilityType.AUTOMATION_NAME=Appium}, platformVersion=7.0, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=EVA-AL00, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceManufacturer=HUAWEI, resetKeyboard=true}]&#10;Session ID: b5dcad9b-be20-4a2e-96f5-3a50d6ce579d&#10;*** Element info: {Using=id, value=com.eisoo.anyshare:id/tv_comment_title_top}" type="org.openqa.selenium.NoSuchElementException">org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.14 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'VivideMacBook-Pro.local', ip: '192.168.35.159', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.13.2', java.version: '1.8.0_40'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{appPackage=com.eisoo.anyshare, deviceScreenSize=1080x1920, networkConnectionEnabled=true, noSign=true, warnings={}, databaseEnabled=false, deviceName=PBV0216526000628, platform=LINUX, MobileCapabilityType.AUTOMATION_NAME=Appium, deviceUDID=PBV0216526000628, appActivity=.AppStartActivity, desired={appPackage=com.eisoo.anyshare, appActivity=.AppStartActivity, noSign=true, platformVersion=7.0, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceName=testyy, resetKeyboard=true, MobileCapabilityType.AUTOMATION_NAME=Appium}, platformVersion=7.0, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=EVA-AL00, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceManufacturer=HUAWEI, resetKeyboard=true}]
+Session ID: b5dcad9b-be20-4a2e-96f5-3a50d6ce579d
+*** Element info: {Using=id, value=com.eisoo.anyshare:id/tv_comment_title_top}
+	at com.eisoo.anysharetest.CommtTest.addComment(CommtTest.java:93)
+	at com.eisoo.anysharetest.CommtTest.addcomm_overlimit(CommtTest.java:68)
+</failure>
+    <system-out><![CDATA[执行1次kill AS
+执行1次kill AS
+存在标签爱数 AnyShare
+Case:addcomm_overlimit
+*****---------addComment
+准备操作文件:复制
+]]></system-out>
+  </testcase>
+  <testcase name="delcommt" classname="com.eisoo.anysharetest.CommtTest" time="45.424"/>
+  <testcase name="replycommt" classname="com.eisoo.anysharetest.CommtTest" time="50.804"/>
+  <testcase name="openAudio" classname="com.eisoo.anysharetest.openFileTest" time="45.084"/>
+  <testcase name="openFile" classname="com.eisoo.anysharetest.openFileTest" time="44.135">
+    <failure message="文件未打开! expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: 文件未打开! expected [true] but found [false]
+	at com.eisoo.anysharetest.openFileTest.openFile(openFileTest.java:44)
+</failure>
+    <system-out><![CDATA[执行1次kill AS
+执行1次kill AS
+存在标签爱数 AnyShare
+准备操作文件:test1.docm
+]]></system-out>
+  </testcase>
+  <testcase name="openPic" classname="com.eisoo.anysharetest.openFileTest" time="26.334">
+    <failure message="An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)&#10;Command duration or timeout: 3.06 seconds&#10;For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html&#10;Build info: version: &apos;2.53.0&apos;, revision: &apos;35ae25b1534ae328c771e0856c93e187490ca824&apos;, time: &apos;2016-03-15 10:43:46&apos;&#10;System info: host: &apos;VivideMacBook-Pro.local&apos;, ip: &apos;192.168.35.159&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.13.2&apos;, java.version: &apos;1.8.0_40&apos;&#10;Driver info: io.appium.java_client.android.AndroidDriver&#10;Capabilities [{appPackage=com.eisoo.anyshare, deviceScreenSize=1080x1920, networkConnectionEnabled=true, noSign=true, warnings={}, databaseEnabled=false, deviceName=PBV0216526000628, platform=LINUX, MobileCapabilityType.AUTOMATION_NAME=Appium, deviceUDID=PBV0216526000628, appActivity=.AppStartActivity, desired={appPackage=com.eisoo.anyshare, appActivity=.AppStartActivity, noSign=true, platformVersion=7.0, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceName=testyy, resetKeyboard=true, MobileCapabilityType.AUTOMATION_NAME=Appium}, platformVersion=7.0, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=EVA-AL00, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceManufacturer=HUAWEI, resetKeyboard=true}]&#10;Session ID: 8a25d399-8ab8-42a0-85a2-ccef1220e75f&#10;*** Element info: {Using=id, value=com.eisoo.anyshare:id/iv_photo}" type="org.openqa.selenium.NoSuchElementException">org.openqa.selenium.NoSuchElementException: 
+An element could not be located on the page using the given search parameters. (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 3.06 seconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'VivideMacBook-Pro.local', ip: '192.168.35.159', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.13.2', java.version: '1.8.0_40'
+Driver info: io.appium.java_client.android.AndroidDriver
+Capabilities [{appPackage=com.eisoo.anyshare, deviceScreenSize=1080x1920, networkConnectionEnabled=true, noSign=true, warnings={}, databaseEnabled=false, deviceName=PBV0216526000628, platform=LINUX, MobileCapabilityType.AUTOMATION_NAME=Appium, deviceUDID=PBV0216526000628, appActivity=.AppStartActivity, desired={appPackage=com.eisoo.anyshare, appActivity=.AppStartActivity, noSign=true, platformVersion=7.0, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceName=testyy, resetKeyboard=true, MobileCapabilityType.AUTOMATION_NAME=Appium}, platformVersion=7.0, webStorageEnabled=false, locationContextEnabled=false, takesScreenshot=true, javascriptEnabled=true, deviceModel=EVA-AL00, unicodeKeyboard=true, sessionOverride=true, platformName=Android, deviceManufacturer=HUAWEI, resetKeyboard=true}]
+Session ID: 8a25d399-8ab8-42a0-85a2-ccef1220e75f
+*** Element info: {Using=id, value=com.eisoo.anyshare:id/iv_photo}
+	at com.eisoo.anysharetest.openFileTest.openPic(openFileTest.java:54)
+</failure>
+    <system-out><![CDATA[执行1次kill AS
+执行1次kill AS
+准备操作文件:ppt类型
+]]></system-out>
+  </testcase>
+  <testcase name="openVideo" classname="com.eisoo.anysharetest.openFileTest" time="41.686"/>
+  <testcase name="testApp on testApp(com.eisoo.anysharetest.AppTest)" classname="com.eisoo.anysharetest.AppTest" time="51.442"/>
+</testsuite>

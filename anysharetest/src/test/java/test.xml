@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+  <test name="Test" preserve-order="true" >
+    <classes>
+      <class name="com.eisoo.anysharetest.LanguageSetTest"/>
+      <methods>
+          <include name="setTraditional"/>
+          <include name="setEn"/>  
+          <include name="setCh"/>
+          <include name="setTraditionalHome"/>
+          <include name="setEnHome"/>  
+          <include name="setChHome"/>
+               
+      </methods>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

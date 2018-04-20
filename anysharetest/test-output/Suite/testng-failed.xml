@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]">
+  <test name="Test(failed)">
+    <classes>
+      <class name="com.eisoo.anysharetest.LanguageSetTest">
+        <methods>
+          <include name="setTraditionalHome"/>
+          <include name="sleep"/>
+          <include name="setCh"/>
+          <include name="afterClass"/>
+          <include name="setTraditional"/>
+          <include name="quit"/>
+          <include name="BeforeClass"/>
+          <include name="setChHome"/>
+          <include name="login"/>
+          <include name="setEn"/>
+          <include name="setEnHome"/>
+        </methods>
+      </class> <!-- com.eisoo.anysharetest.LanguageSetTest -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
