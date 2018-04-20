@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class FullFuctionTest extends Functions {
 	
-/*	
+/*	oooo
 	上传
 	下载
 	文件列表

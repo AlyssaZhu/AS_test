@@ -1,19 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="Surefire test"
-           tests="7"
+           tests="16"
            failures="0"
            errors="0"
-           skipped="0"
-           time="267.740">
+           skipped="16"
+           time="0.001">
   <properties />
   
+            <testcase name="beforeClass" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="afterMethod" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="afterMethod" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="afterClass" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="afterMethod" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="afterMethod" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="afterMethod" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="afterMethod" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="afterMethod" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="renameFile" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="searchAlldir" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="delFiles" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="asearchInlink" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="searchKws" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="delFile" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
+            <testcase name="searchExlink" time="0.0" classname="com.eisoo.anysharetest.FilelistTest">
+          <skipped />
+    </testcase>
   
-            <testcase name="searchExlink" time="57.962" classname="com.eisoo.anysharetest.FilelistTest" />
-                <testcase name="delFiles" time="19.401" classname="com.eisoo.anysharetest.FilelistTest" />
-                <testcase name="searchKws" time="41.112" classname="com.eisoo.anysharetest.FilelistTest" />
-                <testcase name="asearchInlink" time="62.682" classname="com.eisoo.anysharetest.FilelistTest" />
-                <testcase name="renameFile" time="29.877" classname="com.eisoo.anysharetest.FilelistTest" />
-                <testcase name="delFile" time="18.750" classname="com.eisoo.anysharetest.FilelistTest" />
-                <testcase name="searchAlldir" time="37.956" classname="com.eisoo.anysharetest.FilelistTest" />
-      
+  
 </testsuite>
