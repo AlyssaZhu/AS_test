@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidKeyCode;
 
-public class CopyMoveTest extends Functions {
+public class CopyMove extends Functions {
 	
 	
 	@BeforeClass
