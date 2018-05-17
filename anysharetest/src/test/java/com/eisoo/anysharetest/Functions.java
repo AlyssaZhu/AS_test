@@ -3,6 +3,9 @@ package com.eisoo.anysharetest;
 
 import static org.testng.Assert.assertTrue;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -130,8 +133,7 @@ public class Functions extends BaseTest {
 			for(int j=0;j<x;j++)
 		
 			{	for (int i=0; i<8;i++)
-				{ 
-					
+				{ 		
 					driver.findElementByAndroidUIAutomator("new UiSelector().description(\"file\").instance("+i+")").click();
 					}
 			
@@ -637,7 +639,83 @@ public class Functions extends BaseTest {
 				 return false;
 		  
 	  }
+	  /* 备份复制*/
+		public void enterSet(String name) throws Exception
+		{
+			clickName("我的");
+			clickName(name);
+		}
+	//0 代表开始， 1代表暂停
+		public Boolean pauseBackup(int type) throws Exception
+		{	Thread.sleep(1000);
+			String backupStatus1=driver.findElementById("com.eisoo.anyshare:id/tv_backup_status").getText();
+			System.out.println(backupStatus1);
+			if(type==1&&backupStatus1.equals("正在上传...")||type==0&&backupStatus1.equals("已暂停"))
+			{clickId("com.eisoo.anyshare:id/iv_backup_state");}
+			startAS();
+			return exist("已暂停");		
+		}
+		
+		//checked 属性false时候是关闭状态，true 是开启状态
+		public boolean checkBackupBt()
+		{	WebElement status=driver.findElementById("com.eisoo.anyshare:id/cb_backup_switch");
+			String str=status.getAttribute("checked");
+			boolean checkStatus1=Boolean.parseBoolean(str);
+			return checkStatus1;	  
+		}
+		
+		public boolean isChecked(WebElement e)
+		{	  String str=e.getAttribute("checked");
+			  boolean status=Boolean.parseBoolean(str);
+			  return status;
+		}
+		
+		// 关闭状态要求开启 ，开启要求关闭
+		public boolean setBackup(int Type) throws Exception
+		{	
+			if((!checkBackupBt()&&Type==1)||checkBackupBt()&&Type==0)
+			{	
+				clickId("com.eisoo.anyshare:id/cb_backup_switch");
+				try
+				{	clickName("确定");	}
+				catch(Exception e)
+				{	System.out.println("no confrim!");	}	
+			}
+			startAS();//不重新进来，检测不到元素状态变化
+			return checkBackupBt();
+		}
+		public void choosePics() throws Exception
+		{
+			clickName("选择自动备份相册"); 
+			startAS();
+		try{
+		
+		//	WebElement e1=driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.eisoo.anyshare:id/upload_image_gv_item_checkbox\").instance(0)");
+			WebElement e1=(WebElement) driver.findElementsById("com.eisoo.anyshare:id/upload_image_gv_item_checkbox").get(0);
+			if(isChecked(e1))
+				e1.click();
+			System.out.println("yes2");
+		}
+		catch(Exception e)
+		{
+			System.out.println("error4");
+		}
+			for(int i=1;i<5;i++)
+			{
+				WebElement e2=driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.eisoo.anyshare:id/upload_image_group_count\").instance("+i+")");
+				int num=Integer.parseInt(e2.getText());
+				if(num<10&&num>1)
+				{	e2.click();
+					clickId("com.eisoo.anyshare:id/select_img_backup_ok");
+					break;
+				}
+			}
+				driver.pressKeyCode(4);
+				driver.pressKeyCode(4);
+		}
 	  
+		  
+		//这个方法是实现从字符串中筛选数字
 	  public int num(String name)
 	  {
 			 String str1="";
@@ -647,9 +725,7 @@ public class Functions extends BaseTest {
 			 {	 for(int i=0;i<len1;i++)
 				 {
 					 if(name.charAt(i)>=48 && name.charAt(i)<=57)
-					 {
-						 str1+=name.charAt(i);
-					 }
+					 {	 str1+=name.charAt(i);	 }
 				 }
 			  num1=Integer.parseInt(str1); }
 			 return num1; 
@@ -666,6 +742,158 @@ public class Functions extends BaseTest {
 		  Thread.sleep(1000);
 	  }
 
-	
+/******排序涉及的几个方法 viewMode clickTitle changeMode compareDate**********/
+	//可以判断第一个第2个是否坐标相等
+	  public boolean viewMode()
+	  {		WebElement e1= (WebElement) driver.findElementsById("com.eisoo.anyshare:id/ll_content").get(0);
+			WebElement e2= (WebElement) driver.findElementsById("com.eisoo.anyshare:id/ll_content").get(1);
+		if(e1.getLocation().getY()==e2.getLocation().getY()) 
+		{	System.out.println("高度是："+e1.getLocation().getY());
+			return true;}
+		else 
+			return false;
+	  }
+	  
+	  public void clickTitle()
+	  {
+		  clickId("com.eisoo.anyshare:id/tv_title"); 
+	  }
+	  public void changeMode(String type) throws Exception
+	  {
+		  clickId("com.eisoo.anyshare:id/tv_title");
+		  clickName(type);
+	  }
+	  
+	  public boolean compareDate(String date1,String date2) throws Exception
+	  {
+		  DateFormat df = new SimpleDateFormat("YY/MM/DD HH:mm");
+		  Date dt1= df.parse(date1);
+		  Date dt2=  df.parse(date2);
+		  if(dt1.getTime()>=dt2.getTime())
+		  {	return true;}
+		  else
+			 return false;
+	  }
+	  
+	  /* 2018-05-15 该方法目前只针对P9有效，其它手机需要适配
+	  思路一：获取最后，内链的控件位置，复制/粘贴，获取复制,由于系统应用每个手机都不一样，可能不够通用   
+	  思路二：获取包含内链信息的目标元素，以及其父节点，计算复制的相对坐标*/
+	  
+	  public void copyLink() throws Exception{
+		  driver.pressKeyCode(3);
+		  driver.pressKeyCode(3);
+		//  driver.launchApp();
+		  clickDesc("信息");
+		  clickName("‪185 5181 9591‬");
+		  //第一个try  没实际意义，只是为了验证API
+	  try{
+			  WebElement e1=driver.findElement(By.xpath("//android.widget.TextView[@text='123']/parent::*/parent::*/parent::*/parent::*"));
+			  System.out.println(e1.getLocation().getY());
+		  }
+		  catch( Exception e)
+		  {
+			  System.out.println("error3!");
+		  }
+		  
+	  try{
+			  WebElement e1=driver.findElement(By.xpath("//android.widget.TextView[contains(@text,'AnyShare://vivi/')]"));
+			  WebElement e2=driver.findElement(By.xpath("//android.widget.TextView[contains(@text,'AnyShare://vivi/')]/../../../.."));
+			  System.out.println(e2.getLocation().getY());
+			  System.out.println(e1.getLocation().getX());
+			  int x=e1.getLocation().getX()+20;
+			  int y=e2.getLocation().getY(); 
+			  int x0= e1.getLocation().getX()+e1.getSize().width/2;
+			  int y0= e1.getLocation().getY()+e1.getSize().height/2;
+			 driver.swipe(x0, y0, x0, y0, 2000); //长按信息中心位置，使弹出菜单选项
+			 System.out.println("观察");
+			 driver.tap(1, x, y, 200);
+			 driver.pressKeyCode(4);
+		  }
+		  catch( Exception e)
+		  {
+			  System.out.println("error4!");
+		  }
+	  }
+	  
+//以下内容是外链分享部分
+		public boolean  setExlink(int type) throws Exception
+		 {
+			  WebElement status=driver.findElementById("com.eisoo.anyshare:id/tv_share_state");
+			  System.out.println(status.getText());
+			  if((status.getText().equals("未开启")&&type==1)||(status.getText().equals("已开启")&&type==0))
+			  {
+				  status.click();
+				  clickId("com.eisoo.anyshare:id/cb_share_open_link");
+				  Thread.sleep(1000);
+				  clickName("保存");
+				  Thread.sleep(3000);
+			  }
+			  return exist("已开启");
+		  }
+
+		public void exlinkPaste() throws Exception
+		 {		
+			  Thread.sleep(2000);
+			  clickId("com.eisoo.anyshare:id/ll_searchView");
+			  clickName("外链地址");
+			  WebElement e1= driver.findElementById("com.eisoo.anyshare:id/et_search_content");
+			  TouchAction ta = new TouchAction(driver);
+		      ta.longPress(e1).release().perform(); // 长按
+		      Thread.sleep(2000);
+		      driver.swipe(170, 330, 170, 330, 100);
+		      System.out.println("2");
+		      Thread.sleep(3000);
+		 }
+		  
+		 
+	  public boolean manExlink(String type) throws Exception {
+		  setExlink(1);
+		  clickName(type);
+		  switch(type)
+		  {
+		  case"复制外链":
+			  clickName("复制外链");
+			  driver.pressKeyCode(4);
+			  Thread.sleep(2000);
+			  exlinkPaste();
+	          return !exist("搜索外链地址");
+			  //搜索外链进行验证;
+		  case"短信":
+			 driver.findElementById("com.android.mms:id/recipients_editor").sendKeys("17301609232"); ;
+			 driver.findElementByAccessibilityId("发送").click();
+			 int count=driver.findElementByClassName("android.widget.EditText").getText().length();
+			 System.out.println(count);
+			 return(count<10);
+		  case"微信好友":
+			  clickName("Vivi");
+			  clickName("分享");
+			  clickName("返回爱数AnyShare");
+			  return true;
+		  case"微信朋友圈":
+			  clickName("微信朋友圈");
+			  clickName("发表");
+			  return true;
+		  case"QQ":
+			  Thread.sleep(1000);
+			  startAS();
+			  clickName("move");
+			  clickName("发送");
+			  clickName("返回爱数 AnyShare");
+			  return true;
+		  case"邮件":
+			  driver.findElementById("com.android.email:id/chips_edit").sendKeys("125426647@qq.com");
+			  clickId("android:id/icon2");
+			  startAS();
+				return exist("新浪微博");
+			  
+		  case"新浪微博":
+			  Thread.sleep(4000);
+			clickName("发送");
+			startAS();
+			return exist("新浪微博");
+		  default: 
+				 return false;
+		  } 
+	  }
 
 }
