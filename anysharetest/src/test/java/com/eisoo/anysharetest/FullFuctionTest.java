@@ -978,7 +978,7 @@ public class FullFuctionTest extends Functions {
 			 manageFile(1,"内链共享");
 			 assertTrue(!nameExist("王十一"),"存在此用户名"); 
 		  }
-		  @Test
+	//	  @Test
 			public void z_loginDomainTest() throws Exception
 			{	System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 				Thread.sleep(3000);
@@ -986,7 +986,7 @@ public class FullFuctionTest extends Functions {
 				driver.pressKeyCode(4);
 				clearData();
 				startAS();
-				assertTrue(loginTest("anyshare.eisoo.com","zhu.fengyue@eisoo.com","zhufy0902##"),"登录失败");
+				assertTrue(loginTest("anyshare.eisoo.com","xxx","xxxx"),"登录失败");
 			}
 		/*  
 		  @Test
