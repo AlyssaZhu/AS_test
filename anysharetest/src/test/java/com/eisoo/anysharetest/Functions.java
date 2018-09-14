@@ -5,6 +5,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -47,8 +48,8 @@ public class Functions extends BaseTest {
 		{
 			driver.pressKeyCode(3);
 			clickName("爱数 AnyShare");
-			driver.findElementByAndroidUIAutomator("new UiSelector().description(\"uploadimage\").instance(2)").click();
-			driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.eisoo.anyshare:id/framelayout\").instance(1)").click();	
+			driver.findElementByAndroidUIAutomator("new UiSelector().description(\"uploadimage\").instance(3)").click();
+			driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.eisoo.anyshare:id/framelayout\").instance(0)").click();	
 			clickId("com.eisoo.anyshare:id/upload_image_btn_nextstep");
 		}
 		
@@ -89,6 +90,7 @@ public class Functions extends BaseTest {
 	 public void search(String keyWs,String type) throws Exception 
 	   {
 		enterDest("文件类型");
+		Thread.sleep(1000);
 		WebElement searchText1=driver.findElementById("com.eisoo.anyshare:id/ll_searchView");
 		searchText1.click();
 		Thread.sleep(2000);
@@ -101,8 +103,13 @@ public class Functions extends BaseTest {
 		if(type=="内链路径"||type=="外链地址")
 		{
 			switchInput(0);
-			startAS();		
-			driver.swipe(990, 1740, 990, 1740, 200);
+			startAS();	
+			WebElement keyboard=driver.findElementById("com.eisoo.anyshare:id/ll_select_visit_tab");
+			int y=keyboard.getSize().getHeight()+keyboard.getLocation().getY()-50;
+			/*driver.swipe(990, 1740, 990, 1740, 200);//P9 Ok 的坐标，采取相对坐标
+*/			System.out.println(y);
+			driver.swipe(990, y, 990, y, 200);
+			
 		}
 		Thread.sleep(3000);
 		/****************以下是对结果的判断***********/
@@ -194,8 +201,9 @@ public class Functions extends BaseTest {
 	public void setOn() throws Exception
 	{
 		startAS();
-		clickName("我的");
-		clickName("手势密码锁定");
+		/*clickName("我的");
+		clickName("手势密码锁定");*/
+		enterSet("手势密码锁定");
 		WebElement gesture=driver.findElementByClassName("android.widget.CheckBox");
 			gesture.click();
 			lockType("setOn");
@@ -217,8 +225,9 @@ public class Functions extends BaseTest {
 	{
 		unlock();	//测试了解锁
 		startAS();
-		clickName("我的");
-		clickName("手势密码锁定");
+		/*clickName("我的");
+		clickName("手势密码锁定");*/
+		enterSet("手势密码锁定");
 		WebElement gesture=driver.findElementByClassName("android.widget.CheckBox");
 		    gesture.click();
 		    lockType("setOff");
@@ -229,8 +238,9 @@ public class Functions extends BaseTest {
 	{
 		unlock();
 		startAS();
-		clickName("我的");
-		clickName("手势密码锁定");
+	/*	clickName("我的");
+		clickName("手势密码锁定");*/
+		enterSet("手势密码锁定");
 		clickName("修改密码锁");
 		lockType("modify");
 	}
@@ -545,7 +555,7 @@ public class Functions extends BaseTest {
 			 manageFile(0,"评论");
 			 startAS();
 			 WebElement title=driver.findElementById("com.eisoo.anyshare:id/tv_comment_title_top");
-			 int num1=num(title.getText());
+			 int num1=commNum(title.getText());
 			 System.out.println(num1);
 			 if(num1==0)
 			 { System.out.println("当前没有评论，请检查操作条件");
@@ -561,7 +571,7 @@ public class Functions extends BaseTest {
 				 System.out.println("没有删除项");
 			 }
 			 startAS(); 
-			 int num2=num(title.getText());
+			 int num2=commNum(title.getText());
 			 System.out.println(num2);
 			 if(num1==num2+1)
 				 return true;
@@ -578,7 +588,7 @@ public class Functions extends BaseTest {
 			 manageFile(0,"评论");
 			 startAS();
 			 WebElement title=driver.findElementById("com.eisoo.anyshare:id/tv_comment_title_top");
-			 int num1=num(title.getText());
+			 int num1=commNum(title.getText());
 			 System.out.println(num1);
 			 if(num1==0)
 			 { System.out.println("当前没有评论，请检查操作条件");
@@ -597,7 +607,7 @@ public class Functions extends BaseTest {
 				 System.out.println("没有评论供删除/回复/拷贝");
 			 }
 			 startAS(); 
-			 int num2=num(title.getText());
+			 int num2=commNum(title.getText());
 			 System.out.println(num2);
 			 if(num1==num2-1)
 				 return true;
@@ -639,12 +649,7 @@ public class Functions extends BaseTest {
 				 return false;
 		  
 	  }
-	  /* 备份复制*/
-		public void enterSet(String name) throws Exception
-		{
-			clickName("我的");
-			clickName(name);
-		}
+	
 	//0 代表开始， 1代表暂停
 		public Boolean pauseBackup(int type) throws Exception
 		{	Thread.sleep(1000);
@@ -684,7 +689,7 @@ public class Functions extends BaseTest {
 			startAS();//不重新进来，检测不到元素状态变化
 			return checkBackupBt();
 		}
-		public void choosePics() throws Exception
+		public void choosePics(String type) throws Exception
 		{
 			clickName("选择自动备份相册"); 
 			startAS();
@@ -704,11 +709,29 @@ public class Functions extends BaseTest {
 			{
 				WebElement e2=driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.eisoo.anyshare:id/upload_image_group_count\").instance("+i+")");
 				int num=Integer.parseInt(e2.getText());
-				if(num<10&&num>1)
-				{	e2.click();
-					clickId("com.eisoo.anyshare:id/select_img_backup_ok");
-					break;
+				
+				if (type.equals("max"))
+				{
+					if(num>=80)
+					{	e2.click();
+						clickId("com.eisoo.anyshare:id/select_img_backup_ok");
+						break;
+					}
+					else 
+					{
+						System.out.println("没有超过80的相册，请检查！");
+					}
 				}
+				else if(type.equals("mini"))
+				{
+					if(num<10&&num>=1)
+					{	e2.click();
+						clickId("com.eisoo.anyshare:id/select_img_backup_ok");
+						break;
+					}
+				}
+					
+		
 			}
 				driver.pressKeyCode(4);
 				driver.pressKeyCode(4);
@@ -721,6 +744,24 @@ public class Functions extends BaseTest {
 			 String str1="";
 			 int num1=0;
 			 int len1=name.length();
+			 if(len1>8)
+			 {	 for(int i=0;i<len1;i++)
+				 {
+					 if(name.charAt(i)>=48 && name.charAt(i)<=57)
+					 {	 str1+=name.charAt(i);	 }
+				 }
+			  num1=Integer.parseInt(str1); }
+			 else 
+				 num1=0;
+			 return num1; 
+	  }
+	  
+		//这个方法是实现从字符串中筛选数字
+	  public int commNum(String name)
+	  {
+			 String str1="";
+			 int num1=0;
+			 int len1=name.length();
 			 if(len1>2)
 			 {	 for(int i=0;i<len1;i++)
 				 {
@@ -728,9 +769,10 @@ public class Functions extends BaseTest {
 					 {	 str1+=name.charAt(i);	 }
 				 }
 			  num1=Integer.parseInt(str1); }
+			 else 
+				 num1=0;
 			 return num1; 
 	  }
-	  
 	  public void longPress( WebElement e1) throws InterruptedException
 	  { 
 		  int x=e1.getLocation().x;
@@ -766,9 +808,13 @@ public class Functions extends BaseTest {
 	  
 	  public boolean compareDate(String date1,String date2) throws Exception
 	  {
-		  DateFormat df = new SimpleDateFormat("YY/MM/DD HH:mm");
+		  DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");//YY/MM/DD HH:mm
 		  Date dt1= df.parse(date1);
 		  Date dt2=  df.parse(date2);
+		  System.out.println(date1);
+		  System.out.println(date2);
+		  System.out.println(dt1.getTime());
+		  System.out.println(dt2.getTime());
 		  if(dt1.getTime()>=dt2.getTime())
 		  {	return true;}
 		  else
@@ -887,13 +933,103 @@ public class Functions extends BaseTest {
 				return exist("新浪微博");
 			  
 		  case"新浪微博":
-			  Thread.sleep(4000);
-			clickName("发送");
+			  Thread.sleep(5000);
+			  try{
+				 driver.findElementByName("发送");
+			  }
+			  catch(Exception e)
+			  {
+				  System.out.println("没有发现发送按钮");
+				  startAS();
+			  }
+			  clickName("发送");
 			startAS();
 			return exist("新浪微博");
 		  default: 
 				 return false;
 		  } 
 	  }
+	  
+	  /*************checkUI*************************/
+	  //可继续扩展
+	  public void checkInfo()
+	   {
+	 	  Collection coll=driver.findElementsByClassName("android.widget.TextView");
+	 /*	  int num=driver.findElementsByClassName("android.widget.TextView").size();
+	 	  System.out.println(num);
+	 	  WebElement e1=(WebElement) driver.findElementsByClassName("android.widget.TextView").get(4);
+	 	  System.out.println(e1.getText());
+	 	  WebElement e2=(WebElement) driver.findElementsByClassName("android.widget.TextView").iterator().next();
+	 	  System.out.println(e2.getText());*/
+	 	  assertTrue((getE(4).getText().equals("zfy")),"Error:用户名不正确");
+	 	  assertTrue((getE(6).getText().equals("vivi")),"Error:显示名不正确");
+	 	  
+	   }
+	  public void checkSets() throws Exception
+	  {
+	 	 assertTrue((exist("我的消息")&&exist("设置")&&exist("版本信息")),"设置项缺失");
+	 	 clickName("设置");
+	 	 assertTrue(exist("清除缓存"),"error");
+	 	 assertTrue(exist("默认下载位置"),"error");
+	 	 
+	  }
+	  
+	  public WebElement getE(int i)
+	  {
+	 	 WebElement e1=(WebElement) driver.findElementsByClassName("android.widget.TextView").get(i-1);
+	 	System.out.println(e1.getText());
+	 	 return e1;
+	  }
+	  /*****************内链共享****************/
+		/*内链*/
+	  //20180522
+	  public void  switchAccount(String name,String psd) throws Exception
+	  {
+		  logout();
+		  Thread.sleep(3000);
+		  driver.findElementById("com.eisoo.anyshare:id/et_account").sendKeys(name);
+		  driver.findElementById("com.eisoo.anyshare:id/et_password").sendKeys(psd);
+		  driver.pressKeyCode(4);
+		  clickName("登录");
+		  Thread.sleep(3000);
+		  startAS();   
+	  }
+	  
+	  public boolean nameExist(String name) throws Exception
+		{
+		    Thread.sleep(2000);
+				if(exist(name))
+					return true;
+			else
+			{
+					for(int i=0;i<5;i++)
+			  		{  System.out.println("滑动"+i+"次");
+			  			swipe("down");
+			  			if(exist(name))
+			  				return true;
+			  		}
+					return false;
+			}
+		}
+	  
+	  
+	  public void delVisitor() throws Exception
+	  {
+		  clickFile("删除") ;
+		  clickName("保存"); 
+	  }
+	  
+	  //通用的方式是找到父节点，在找子节点
+	  public void addVisitor() throws Exception
+	  {
+		  clickName("添加访问者");
+		  clickFile("ZZ");
+		  clickId("com.eisoo.anyshare:id/rl_checkbox");
+
+		  clickId("com.eisoo.anyshare:id/tv_ok");
+		  clickName("保存");
+		  Thread.sleep(1000);
+	  }
+	  
 
 }

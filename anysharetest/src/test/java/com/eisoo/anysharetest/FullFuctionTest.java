@@ -59,6 +59,7 @@ public class FullFuctionTest extends Functions {
 	  	  enterDest("上传");
 	  	  assertTrue(upload(1,1,"上传音频"),"上传失败");
 	  	  clearUploadList();  
+	  	  switchWifi(1); 
 	  }
 	  @Test 
 	  public void a_uploadFile() throws Exception
@@ -153,8 +154,22 @@ public class FullFuctionTest extends Functions {
 	  	//  clearUploadList();
 	  }
 	  
+	  //20180525
+	   @Test
+	  public void a_pauseAll() throws Exception
+	  {
+		  enterDest("上传");
+		  assertTrue(upload(10,1,"上传音频"),"上传失败") ; 
+		  assertTrue(exist("全部暂停"),"不存在全部暂停按钮");
+		  clickName("全部暂停");
+		  assertTrue(!exist("正在上传..."),"存在正在上传");  
+		  clickName("全部开始");
+		  assertTrue(exist("正在上传..."),"不存在正在上传"); 
+		  assertTrue(!exist("已暂停"),"存在已暂停"); 
+		  clearUploadList(); 
+	  }
 	
-	/*  ----------------下载-----------------------------*/
+	 /* ----------------下载-----------------------------*/
 	//普通下载 开启仅在Wi-Fi&&WiFi环境
 		@Test(enabled=true) 
 		public void  b_downldAFile() throws Exception
@@ -238,7 +253,7 @@ public class FullFuctionTest extends Functions {
 		  public void c_delFile() throws Exception{
 			System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			  enterDest("上传");
-			  String fileName=manageFile(2,"删除");
+			  String fileName=manageFile(1,"删除");
 			  clickName("确定");
 			  assertTrue(!exist(fileName),"已删除!");   
 		  }
@@ -256,7 +271,8 @@ public class FullFuctionTest extends Functions {
 			 	manageFile(2,"重命名");
 			 	WebElement e1= driver.findElementByClassName("android.widget.EditText");
 			 	String fname1=e1.getText();
-			 	e1.sendKeys(fname1+"1");
+			 //	e1.sendKeys(fname1+"1"); 数值增加太快
+			 	e1.sendKeys("0A"); 
 			 	clickName("确定"); 
 			  }
 
@@ -340,7 +356,32 @@ public class FullFuctionTest extends Functions {
 			  assertTrue(exist(e1),"文件未打开!");  
 			  killAS();
 		  }
-		  
+		  @Test//按钮打开
+		  public void d_openExcel() throws Exception {
+			  System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
+			  enterDest("文件类型");
+			  clickFile("excel");
+			  manageFile(0,"打开");
+			  Thread.sleep(10000);
+			  clickName("WPS Office");	
+			  Thread.sleep(12000);
+			  try{
+				  driver.findElementByName("编辑");
+			  }
+			  catch (Exception e)
+			  {
+				  Thread.sleep(5000);  
+			  }
+			  if(exist("不保存"))  //new
+			  { clickName("不保存");}
+			  Thread.sleep(1000);
+			  assertTrue(exist("编辑"),"文件未打开!");  
+			  killAS();
+			  Thread.sleep(1000);
+			  if(exist("不保存"))  //new
+			  { clickName("不保存");}
+			  killAS();
+		  }
 	//移动复制
 		//复制个数
 			@Test
@@ -405,13 +446,13 @@ public class FullFuctionTest extends Functions {
 				Thread.sleep(2000);
 				killAS();
 			}
-/*			@Test
+			@Test
 			public void e_moveAllFiles() throws Exception
 			{	System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 				move(10,"");
 			//	delFiles(10);
 				moveBack();
-			}*/
+			}
 			
 	  //评论,先统计评论数
 	  @Test
@@ -493,12 +534,14 @@ public class FullFuctionTest extends Functions {
 		public void h2_modifyTest() throws Exception
 		{	System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			modify();
+			killAS();
 		}
 		
 		@Test
 		public void h3_setOffTest() throws Exception
 		{	System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			setOff();
+			killAS();//20180529
 		}
 		//语言
 		
@@ -520,10 +563,11 @@ public class FullFuctionTest extends Functions {
 		public void i_setaEn() throws Exception
 		{	System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			startAS();
+			Thread.sleep(1000);//20180529
 			startAS();
 			langSet("English");
 		}
-			
+		
 		@Test 
 		public void i_setcChHome() throws Exception
 		{	System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -547,7 +591,7 @@ public class FullFuctionTest extends Functions {
 			startAS();
 			langSetHome("English");
 		}
-
+	
 		//backup
 		@Test
 		public void j1_checkdefaultUI() throws Exception
@@ -557,8 +601,9 @@ public class FullFuctionTest extends Functions {
 			 clickName("传输");
 			 clickName("上传列表");
 			 assertTrue(!exist("自动备份任务"),"error1：默认是开启状态!");
-			 clickName("我的");
-			 clickName("备份设置");	  
+			/* clickName("我的");
+			 clickName("备份设置");	*/ 
+			 enterSet("备份设置");
 			 assertTrue(!checkBackupBt(),"error2:默认是开启状态！"); 
 		}
 		
@@ -570,6 +615,8 @@ public class FullFuctionTest extends Functions {
 			enterSet("备份设置");
 			assertTrue(setBackup(1),"error1：按钮未开启");
 			driver.pressKeyCode(4);
+			Thread.sleep(2000);
+			driver.pressKeyCode(4);
 			clickName("传输");
 			clickName("上传列表");
 			assertTrue(exist("自动备份任务"),"error2：开启后上传列表没有备份任务!");
@@ -579,7 +626,7 @@ public class FullFuctionTest extends Functions {
 			Thread.sleep(15000);
 			int num2=num(e.getText());
 			System.out.println("剩余备份数"+num2);	
-			assertTrue((num1>num2),"error3:没有进行备份！");
+			assertTrue((num1>num2||num1==0),"error3:没有进行备份！");
 		}
 		
 		/*测试暂停备份，继续备份*/
@@ -594,9 +641,20 @@ public class FullFuctionTest extends Functions {
 				enterSet("备份设置");
 				setBackup(1);
 				driver.pressKeyCode(4);
+				Thread.sleep(2000);
+				driver.pressKeyCode(4);
 				clickName("传输");
 				clickName("上传列表");
 			}
+			//新增判断，备份完成时，切换相册继续备份
+			if(exist("照片自动备份完成"))
+			{ enterSet("备份设置");
+			  choosePics("max");
+			  Thread.sleep(2000);
+				driver.pressKeyCode(4);
+				clickName("传输");
+				clickName("上传列表");
+				}
 			assertTrue(pauseBackup(1),"error1:没有暂停");
 			Thread.sleep(2000);
 			assertTrue(!pauseBackup(0),"error2:暂停了");
@@ -613,16 +671,28 @@ public class FullFuctionTest extends Functions {
 				enterSet("备份设置");
 				setBackup(1);
 				driver.pressKeyCode(4);
+				Thread.sleep(2000);
+				driver.pressKeyCode(4);
 				clickName("传输");
 				clickName("上传列表");
 			}
+			//新增判断，备份完成时，切换相册继续备份
+			if(exist("照片自动备份完成"))
+			{ enterSet("备份设置");
+			  choosePics("max");
+			  Thread.sleep(2000);
+				driver.pressKeyCode(4);
+				clickName("传输");
+				clickName("上传列表");
+				}
 			switchWifi(0);
+			Thread.sleep(1000);
 			startAS();	
 			assertTrue(exist("等待Wi-Fi..."),"error:非wifi 下没有等待");
 			switchWifi(1);
 			Thread.sleep(1000);
 			startAS();	
-			assertTrue(exist("正在上传..."),"error:wifi 下没有继续");
+			assertTrue(exist("正在上传...")||exist("照片自动备份完成"),"error:wifi 下没有继续");
 		}
 		
 		/*最好选择数目比较小的相册进行备份已方便快速备份完成
@@ -633,7 +703,9 @@ public class FullFuctionTest extends Functions {
 			startAS();
 			enterSet("备份设置");
 			assertTrue(setBackup(1),"error1：按钮未开启");
-			choosePics();
+			choosePics("mini");
+			Thread.sleep(2000);
+			driver.pressKeyCode(4);
 			clickName("传输");
 			clickName("上传列表");
 			Thread.sleep(30000);	
@@ -641,32 +713,25 @@ public class FullFuctionTest extends Functions {
 		}
 		@Test
 		public void j6_stopBackup() throws Exception
-		{
+		{	
+			 System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			startAS();
 			enterSet("备份设置");
 			assertTrue(!setBackup(0),"error1：按钮仍然开启");
 		}
-		@Test
-		public void z_loginDomainTest() throws Exception
-		{	System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
-			Thread.sleep(3000);
-			driver.pressKeyCode(4);
-			driver.pressKeyCode(4);
-			clearData();
-			driver.pressKeyCode(4);
-			assertTrue(loginTest("anyshare.eisoo.com","zhu.fengyue@eisoo.com","zhufy0902##"),"登录失败");
-		}
+
 		
 		@Test
 		public void k_timeOrder() throws Exception 
-		{	
+		{	 System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			enterDest("根目录");
+		//	clickName("vivi");
 			 changeMode("按时间倒序排序"); //获取页面时间标签，逐个比较
 			 for(int i=0;i<5;i++)
 			 {	WebElement e1=(WebElement) driver.findElementsById("com.eisoo.anyshare:id/tv_file_time").get(i);
 			 	WebElement e2=(WebElement) driver.findElementsById("com.eisoo.anyshare:id/tv_file_time").get(i+1);
 			 	System.out.println("比较第"+i+"次！");
-			 	assertTrue(compareDate(e1.getText(),e2.getText()),"时间顺序有误！");
+			 	assertTrue(compareDate(e1.getText(),e2.getText()),i+"时间顺序有误！");
 			 }
 			changeMode("按文件名称排序");
 		  }
@@ -674,6 +739,7 @@ public class FullFuctionTest extends Functions {
 		 @Test
 		 public void k_thumbnail_View() throws Exception
 		  {
+			 System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			 enterDest("根目录");
 			 changeMode("缩略图视图");
 			 startAS();
@@ -684,10 +750,19 @@ public class FullFuctionTest extends Functions {
 		
 		 @Test
 		  public void l_cancelLink() throws Exception {
+			 System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			 Thread.sleep(3000);
 			 copyLink();
-			  startAS();
-			  Thread.sleep(2000);
+			 driver.pressKeyCode(3); //new
+			 clickName("爱数 AnyShare");
+			 Thread.sleep(3000);
+			 try{
+				 driver.findElementByName("查看");
+			 }
+			 catch(Exception e){
+				 driver.pressKeyCode(3); //new
+				 clickName("爱数 AnyShare");
+			 }
 			  assertTrue(exist("查看"),"不存在定位弹框！");
 			  clickName("取消");  
 		  }
@@ -695,19 +770,38 @@ public class FullFuctionTest extends Functions {
 		  @Test
 		  public void l_openLink() throws Exception
 		  {
+			  System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 			  Thread.sleep(3000);
 			  copyLink();
-			  startAS();
-			  Thread.sleep(2000);
+			  driver.pressKeyCode(3); //new
+				 clickName("爱数 AnyShare");
+				 Thread.sleep(3000);
+				 try{
+					 driver.findElementByName("查看");
+				 }
+				 catch(Exception e){
+					 driver.pressKeyCode(3); //new
+					 clickName("爱数 AnyShare");
+				 }
 			  assertTrue(exist("查看"),"不存在定位弹框！");
 			  clickName("查看"); 
 			  Thread.sleep(2000);
 			  assertTrue(exist(driver.findElement(By.name("共享"))),"不存在此元素！");
 		  }
 		  
+		  //放到最后主要是为了防止有弹框出现时，进行取消
 		   @Test
-		  public void l_nolink() throws Exception
+		  public void l_znolink() throws Exception
 		  {
+			 System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
+			
+			  Thread.sleep(3000);
+			  startAS();
+			  if(exist("取消"))
+			  {
+				  clickName("取消");
+				  System.out.println("error: 内链弹框显示");
+			  }
 			  enterDest("共享");
 			  manageFile(0,"内链共享");
 			  clickName("复制内链");
@@ -768,11 +862,13 @@ public class FullFuctionTest extends Functions {
 		 	  enterDest("共享");
 		 	  manageFile(0,"外链分享");
 		 	  assertTrue(manExlink("复制外链"),"未完成复制外链");  
+		 	  killAS(); //20180529
 		   }
 		  
 		   @Test
 		   public void m_closeExlink() throws Exception
 		   {
+			  System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
 		 	  enterDest("共享");
 		 	  manageFile(1,"外链分享");
 		 	  assertTrue(setExlink(1),"未开启");
@@ -780,4 +876,155 @@ public class FullFuctionTest extends Functions {
 		 	  manageFile(1,"外链分享");
 		 	  assertTrue(!setExlink(0),"未关闭");  
 		   }
+		@Test
+		public void a_checkUI() throws Exception {
+			  startAS();
+			  assertTrue(exist("文档"),  "no 文档!");
+			  assertTrue(exist("常用"),  "no 常用!");
+			  assertTrue(exist("传输"),  "no 传输!");
+			  clickName("我的");
+			  clickId("com.eisoo.anyshare:id/ll_personal_userinfo");
+			  checkInfo();
+			  driver.pressKeyCode(4);
+			  Thread.sleep(2000);
+			  checkSets();  
+		  }
+		
+
+		  @Test
+		  public void n1_addOne() throws Exception{
+			  System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
+			  enterDest("共享");  
+			  manageFile(2,"内链共享");
+			  WebElement e1= driver.findElementByName("保存");
+			  assertTrue(!e1.isEnabled(),"当前保存按钮为可用状态，未编辑应该不可用！");
+			  if(!nameExist("王十一"))
+			  { addVisitor();
+			  	Thread.sleep(2000);
+				manageFile(2,"内链共享");
+				assertTrue(nameExist("王十一"),"不存在此用户名"); 
+				}
+			  killAS();
+		  }
+		
+		  @Test
+		  public void n1_checkAdd() throws Exception
+		  {	  System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
+			  startAS();
+			  switchAccount("王十一","123123");
+			  clickName("共享文档");
+			  assertTrue(exist("vivi"),"不存在被分享的文件");
+			  clickName("我的");
+			  clickName("我的消息");
+			  startAS();
+			  WebElement e1= (WebElement) driver.findElementsById("com.eisoo.anyshare:id/tv_file_send").get(0);
+			  assertTrue(e1.getText().contains("vivi给您共享了"),"第一条记录不是共享");   
+		  }
+		  
+		  @Test
+		  public void n2_delOne() throws Exception{
+			  System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
+			  Thread.sleep(2000);
+			  startAS(); 
+			  switchAccount("zfy","123123");
+			  enterDest("共享");  
+			  manageFile(2,"内链共享");
+			  WebElement e1= driver.findElementByName("保存");
+			  assertTrue(!e1.isEnabled(),"当前保存按钮为可用状态，未编辑应该不可用！");
+			  if(nameExist("王十一"))
+			  { delVisitor();
+			     Thread.sleep(2000);
+			     manageFile(2,"内链共享");
+				 assertTrue(!nameExist("王十一"),"不存在此用户名");
+			  }
+			  killAS();
+		  }
+		
+		  @Test
+		  public void n3_checkdel() throws Exception
+		  {	  System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
+			  startAS();
+			  switchAccount("王十一","123123");
+			  startAS();
+			//  clickName("共享文档");
+			//  assertTrue(exist("vivi"),"不存在被分享的文件");
+			  clickName("我的");
+			  clickName("我的消息");
+			  startAS();
+			  WebElement e1= (WebElement) driver.findElementsById("com.eisoo.anyshare:id/tv_file_send").get(0);
+			  assertTrue(e1.getText().contains("vivi给您取消共享"),"第一条记录不是共享");   
+		  }
+		  
+		  // 目的是为了将账号切回来继续测试，检查保存按钮默认状态
+		  @Test
+		  public void n4_share() throws Exception {
+			  System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
+			  startAS();
+			  switchAccount("zfy","123123");
+			  enterDest("共享");  
+			  manageFile(1,"内链共享");
+			  WebElement e1= driver.findElementByName("保存");
+			  assertTrue(!e1.isEnabled(),"当前保存按钮为可用状态，未编辑应该不可用！");
+			  if(!nameExist("王十一"))
+			  { addVisitor();
+			  	}
+			  else 
+				  driver.pressKeyCode(4);
+			 Thread.sleep(2000);
+			 manageFile(1,"内链共享");
+			 assertTrue(nameExist("王十一"),"不存在此用户名");   
+			 delVisitor();
+			 Thread.sleep(2000);
+			 manageFile(1,"内链共享");
+			 assertTrue(!nameExist("王十一"),"存在此用户名"); 
+		  }
+		  @Test
+			public void z_loginDomainTest() throws Exception
+			{	System.out.println("CaseId"+(++caseId)+":"+Thread.currentThread().getStackTrace()[1].getMethodName());
+				Thread.sleep(3000);
+				driver.pressKeyCode(4);
+				driver.pressKeyCode(4);
+				clearData();
+				startAS();
+				assertTrue(loginTest("anyshare.eisoo.com","zhu.fengyue@eisoo.com","zhufy0902##"),"登录失败");
+			}
+		/*  
+		  @Test
+		  public void o_cancelLink() throws Exception {
+			  Thread.sleep(3000);
+			  copyLink();
+			  startAS();
+			  Thread.sleep(2000);
+			  assertTrue(exist("查看"),"不存在定位弹框！");
+			  clickName("取消");  
+		  }
+		  
+		  @Test
+		  public void o_openLink() throws Exception
+		  {
+			  Thread.sleep(3000);
+			  copyLink();
+			  startAS();
+			//  startAS();
+			  Thread.sleep(2000);
+			  assertTrue(exist("查看"),"不存在定位弹框！");
+			  clickName("查看"); 
+			  Thread.sleep(2000);
+			  assertTrue(exist(driver.findElement(By.name("共享"))),"不存在此元素！");
+		  }
+		  
+		   @Test
+		  public void o_znolink() throws Exception
+		  {  Thread.sleep(3000);
+			   startAS();
+			   if(exist("取消")){
+				   clickName("取消");   
+			   }
+			  enterDest("共享");
+			  manageFile(0,"内链共享");
+			  clickName("复制内链");
+			  startAS();
+			  assertTrue(!exist("查看"),"存在定位弹框！");
+		  }*/
+		  
 }

@@ -13,10 +13,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import io.appium.java_client.NetworkConnectionSetting;
 import io.appium.java_client.android.AndroidDriver;
 
 public class BaseTest {
-	static AndroidDriver driver;
+	protected static AndroidDriver driver;
 	static int moduleId=0;
 	static int caseId=0;
 	//初始化driver
@@ -46,7 +47,7 @@ public class BaseTest {
 		cap.setCapability("noSign", "True");
 		cap.setCapability("sessionOverride", true); 
 		driver =new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"),cap);
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);//设置隐式等待超时时间2秒
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);//设置隐式等待超时时间3秒
 		//Thread.sleep(3000);
 		System.out.println("Module"+(++moduleId)+":"+this.getClass().getName());
 	}
@@ -86,6 +87,7 @@ public class BaseTest {
 		driver.pressKeyCode(4);
 		driver.pressKeyCode(4);
 		driver.pressKeyCode(4);
+		driver.pressKeyCode(4);
 		if(!exist("爱数 AnyShare" ,1))
 			{	driver.pressKeyCode(4);
 				driver.pressKeyCode(4);
@@ -101,9 +103,10 @@ public class BaseTest {
 	 }
 
 	public void startAS() throws Exception 
-	{ 		if(!elementNameExist("爱数 AnyShare"))
-			driver.pressKeyCode(3);
+	{ 		 if(!elementNameExist("爱数 AnyShare"))
+				driver.pressKeyCode(3);
 			clickName("爱数 AnyShare");
+			Thread.sleep(1000);
 	}
 	
 
@@ -143,8 +146,7 @@ public class BaseTest {
 	public void clearCache() throws Exception
 	{
 		System.out.println("清缓存");
-		clickName("我的");
-		clickName("清除缓存");
+		enterSet("清除缓存");
 		clickName("确定");	
 	}
 	
@@ -194,6 +196,7 @@ public class BaseTest {
 			clickName("爱数 AnyShare");
 			clickName("vivi");
 		}
+		Thread.sleep(1000);
 		clickName(".自动化目录");
 		if(destName!="根目录")
 		{clickFile(destName);}
@@ -202,24 +205,18 @@ public class BaseTest {
 	
 	public void enterNoPermission (String name) throws Exception
 	{//	Thread.sleep(2000);
-		driver.pressKeyCode(3);
-		driver.pressKeyCode(3);//有时候不灵敏，需要多点次
-		clickName("爱数 AnyShare");
-		Thread.sleep(3000);//不休眠，还没有进来
-		driver.pressKeyCode(3);
-		clickName("爱数 AnyShare");
-	 //	Thread.sleep(3000);
+		startAS();
+	 	Thread.sleep(1000);
 	/**************20171212.首页改进不需要点击个人文档，而5.0.18.2之前需要*******************/
 		try
 		{clickName("共享文档");}//程序必须先启动，按home再次进来，才能点中个人文档，疑似框架的问题。
 		catch(Exception e)
-		{	driver.pressKeyCode(3);
-			clickName("爱数 AnyShare");
+		{	killAS();
+			startAS();
 			clickFile("共享文档");
 		}
-		
 		clickFile("zfy1");
-		clickName( "只有显示权限文件夹ZFY");	
+		clickFile( "只有显示权限文件夹ZFY");	
 	}
 	
 	
@@ -300,6 +297,7 @@ public class BaseTest {
   				swipe("up");}
   		}
   	}
+  	
   	public boolean exist(WebElement e1)
   	{
   		try{
@@ -350,7 +348,6 @@ public class BaseTest {
 			{
 				System.out.println("没有这个元素") ;
 				return false;	
-				
 			}
 	}
  	//截图操作
@@ -396,24 +393,11 @@ public class BaseTest {
 		System.out.println("2");
   	}
   
-  	//登录方法封装
-  	public boolean loginTest(String sevAdress, String account, String passwd) throws Exception
+
+  	
+  	public boolean log_agin() throws Exception
   	{
-  		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-  		Thread.sleep(1000);
-  	//	driver.pressKeyCode(3);
-  		agreePerm(); //首次启动需要初始化权限	
-  		try{
-  		driver.findElementByName("爱数 AnyShare").click();
-  		agreePerm();	}
-  		catch(Exception e)
-  		{ }
-		driver.findElementById("com.eisoo.anyshare:id/et_serverAddress").sendKeys(sevAdress);
-		WebElement confrim= driver.findElementByName("确定");
-		confrim.click();
-		Thread.sleep(1000);
-		driver.findElementByName("请输入账号").sendKeys(account);
-		driver.findElementById("com.eisoo.anyshare:id/et_password").sendKeys(passwd);
+		driver.findElementById("com.eisoo.anyshare:id/et_password").sendKeys("123123");
 		driver.pressKeyCode(4);
 		driver.findElementByName("登录").click();	
 		Thread.sleep(3000);
@@ -424,10 +408,7 @@ public class BaseTest {
 		Thread.sleep(3000);
 		startAS();
 		return exist("常用");
-
-		
   	}
-  	
  
   	@Test(enabled= false)
   	public void testLogin() throws Exception
@@ -447,10 +428,24 @@ public class BaseTest {
 		swipefindElement("应用管理");
 		Thread.sleep(1000);
 		driver.findElementByName("应用管理").click();
-		driver.findElementByName("爱数 AnyShare").click();
+		try{
+		Thread.sleep(2000);
+		driver.findElementByName("爱数 AnyShare").click();}
+		catch(Exception e)
+		{
+			Thread.sleep(3000);
+			driver.findElementByName("爱数 AnyShare").click();	
+		}
 		driver.findElementByName("存储").click();
 		driver.findElementByName("删除数据").click();
-		driver.findElementByName("删除").click();
+		try{
+			driver.findElementByName("删除").click();
+		}
+		catch(Exception e)
+		{
+			driver.findElementByName("确定").click();//P10适配
+		}
+		
 		driver.pressKeyCode(3);	
 		System.out.println("clearData 清除数据");
   	}
@@ -459,9 +454,8 @@ public class BaseTest {
  
 	public void switchWifi(int status) throws Exception
 	{	
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+	/*	driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		driver.openNotifications();
-	//	driver.findElementByName("开关").click();
 	
 		if(elementNameExist("WLAN")&&status==1)
 		{
@@ -470,16 +464,45 @@ public class BaseTest {
 		}
 		else if(!elementNameExist("WLAN")&&status==0)
 		{	driver.findElementByAccessibilityId("WLAN 已开启,WLAN 信号强度满格。,Eisoo-sh,打开WLAN设置。").click();//Desc已变更
-			//driver.findElementByAndroidUIAutomator("new UiSelector().description(\"uploadfile\").instance("+i+")").click();
-		//FAil	driver.findElementByAndroidUIAutomator("new UiSelector().class(\"android.widget.Switch\").instance(0)").click();
-		// Fail	driver.findElementByAccessibilityId("WLAN 已开启,WLAN 信号强度满格。,Eisoo-sh,打开WLAN设置。").click();//
-		//	clickName("Airdream_423D3A"); Other company
 			System.out.println("wifi由开启切换至关闭！");
 		}
 		else
 			System.out.println("网络不需要切换");	
 		driver.pressKeyCode(4);
-		System.out.println("执行返回");
+		System.out.println("执行返回");*/
+		//method 2
+		if(status==1)
+		{	
+			driver.setNetworkConnection(new NetworkConnectionSetting(6));
+			int current1=driver.getNetworkConnection().value;
+			System.out.println(current1);
+			if(current1!=6)
+			{
+				driver.openNotifications();
+				driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"android:id/icon\").instance(0)").click();	
+			}
+		}
+		else if(status==0)
+		{
+			int current2=driver.getNetworkConnection().value;
+			
+			if(current2!=4)
+			{
+				driver.openNotifications();
+				driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"android:id/icon\").instance(0)").click();
+			}
+		}
+		
+	/*	int current=driver.getNetworkConnection().value;
+		if((status==1&&current!=6)||(status==0&&current!=4))
+		{	
+
+				driver.openNotifications();
+				driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"android:id/icon\").instance(0)").click();	
+			}
+		else 
+			System.out.println("no need!");*/
+		
 	}
 	
 	
@@ -534,11 +557,12 @@ public class BaseTest {
   	{
 		if(!exist("正在"+name+"..."))
 			Thread.sleep(1000);
-		for(int i=0;i<2;i++)
-		{	if(!exist("已暂停"))
+		for(int i=0;i<3;i++)
+		{	if(exist("已暂停"))
+			{ break;}
+			else
 			driver.findElementByAndroidUIAutomator("new UiSelector().description(\"download\").instance(0)").click();
-		}
-  			
+		}		
   		if(type==1)
   		{   Thread.sleep(1000);
   			driver.findElementByAndroidUIAutomator("new UiSelector().description(\"download\").instance(0)").click();}
@@ -558,7 +582,7 @@ public class BaseTest {
 		}
 	}
 	public void markListFile(int num) throws Exception
-	{	
+	{	Thread.sleep(1500);
 		WebElement  mulSelected = driver.findElementByAccessibilityId("multiple");
 		mulSelected.click();
 		if(num>8)
@@ -716,7 +740,8 @@ public class BaseTest {
 		public void langSet(String lang) throws Exception
 			{
 				Thread.sleep(1000);
-				driver.findElementById("com.eisoo.anyshare:id/rl_setting").click();
+				clickId("com.eisoo.anyshare:id/rl_setting");
+				clickId("com.eisoo.anyshare:id/rl_setting");
 				driver.findElementById("com.eisoo.anyshare:id/rl_language_set").click();
 				clickName(lang);
 				WebElement e1=driver.findElementById("com.eisoo.anyshare:id/tv_language_set_save");
@@ -760,4 +785,88 @@ public class BaseTest {
 			}
 		}
 		
+		  public void rename(int rank) throws Exception
+		  {
+			  manageFile(rank,"重命名");
+			  WebElement e1= driver.findElementByClassName("android.widget.EditText");
+			 	String fname1=e1.getText();
+			 	e1.sendKeys(fname1+"1");
+			 	clickName("确定");   
+		  }	
+		
+		  public void removeSign() throws Exception
+		  {
+			  
+			  for(int i=0;i<4;i++)
+			  {		 
+				  try{
+					  if(exist(driver.findElementByAccessibilityId("guide_view")))
+						 {
+							  Thread.sleep(1000);
+							 driver.findElementByAccessibilityId("guide_view").click();
+							 System.out.println("取消第"+i+"次");
+								 }
+				  }
+				  catch(Exception e)
+			   {  System.out.println("error :no sign "+i); }
+			  }
+			 
+			  Thread.sleep(2000);
+			//  clickFile("vivi");
+			  manageFile(0,"打开");
+			  Thread.sleep(1000);
+			  try{
+				  if(exist(driver.findElementByAccessibilityId("guide_view")))
+					 {
+						  Thread.sleep(1000);
+						 driver.findElementByAccessibilityId("guide_view").click();
+							 }
+			  }
+			  catch(Exception e)
+			   { 
+				  System.out.println("error:no sign 5");
+			   }
+			 
+			  driver.pressKeyCode(4);
+			  
+		  }
+		  
+		  	//登录方法封装
+		  	public boolean loginTest(String sevAdress, String account, String passwd) throws Exception
+		  	{
+		  		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		  		Thread.sleep(1000);
+		  	//	driver.pressKeyCode(3);
+		  		agreePerm(); //首次启动需要初始化权限	
+		  		try{
+		  		driver.findElementByName("爱数 AnyShare").click();
+		  		agreePerm();	}
+		  		catch(Exception e)
+		  		{ }
+				driver.findElementById("com.eisoo.anyshare:id/et_serverAddress").sendKeys(sevAdress);
+				WebElement confrim= driver.findElementByName("确定");
+				confrim.click();
+				Thread.sleep(1000);
+				driver.findElementByName("请输入账号").sendKeys(account);
+				driver.findElementById("com.eisoo.anyshare:id/et_password").sendKeys(passwd);
+				driver.pressKeyCode(4);
+				driver.findElementByName("登录").click();	
+				Thread.sleep(5000);
+		/*		String[] handles=new String[driver.getWindowHandles().size()];
+			//	System.out.println(handles.length);
+				driver.getWindowHandles().toArray(handles);	//切换到注册窗口
+				WebDriver handle1=driver.switchTo().window(handles[1]);*/
+				startAS();
+				
+				removeSign();
+				return exist("常用");	
+		  	}
+		  	
+		    /* 备份复制*/
+			public void enterSet(String name) throws Exception
+			{
+				clickName("我的");
+				clickName("设置");
+				clickName(name);
+			}
 }
